@@ -1,1 +1,21 @@
 
+name: Free Kali Linux VPS
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  kali-linux:
+    runs-on: ubuntu-latest
+    container:
+      image: kalilinux/kali-rolling
+    steps:
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y curl sudo wget tar openssh-client
+          
+      - name: Start SSH Session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          sudo: false
